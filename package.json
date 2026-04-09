@@ -1,0 +1,31 @@
+{
+  "name": "mzansibuilds",
+  "version": "1.0.0",
+  "description": "\"# MzansiBuilds\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lihle-sibiya/MzansiBuilds.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/lihle-sibiya/MzansiBuilds/issues"
+  },
+  "homepage": "https://github.com/lihle-sibiya/MzansiBuilds#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.2.0",
+    "globals": "^17.4.0",
+    "nodemon": "^3.1.14",
+    "prettier": "^3.8.1"
+  }
+}
