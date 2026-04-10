@@ -22,3 +22,21 @@ Every user journey requirement from the specification is implemented:
 | 3 | Live feed of what others are building with comments and collaboration requests | `GET /api/projects` feed with embedded comments and collaboration request flag |
 | 4 | Continuously update project progress with milestones | `POST /api/projects/:id/milestones` with visual timeline on profile |
 | 5 | Completed projects added to Celebration Wall | `PATCH /api/projects/:id/complete` -> dedicated wall page |
+
+---
+
+
+## 3. Tech Stack
+
+| Layer | Technology | Reason |
+|------|-----------|--------|
+| Frontend | React 18 | Component-based UI, industry standard |
+| API Calls | Axios | Clean HTTP client with support for interceptors (useful for JWT handling) |
+| Backend | Node.js + Express | Fast, lightweight REST API |
+| Database | MongoDB + Mongoose | Flexible document model suits project and milestone nesting |
+| Authentication | JSON Web Tokens (JWT) | Stateless, scalable authentication |
+| Password Hashing | bcryptjs | Industry-standard secure password storage |
+| Testing | Jest + Supertest | Unit and integration testing |
+| CI/CD | GitHub Actions | Automated testing and deployment pipeline |
+| Hosting (API) | Render | Free-tier Node.js hosting |
+| Hosting (Frontend) | Netlify | Fast static site hosting for React apps |
