@@ -107,16 +107,16 @@ const ProjectSchema = new Schema(
       type: String,
       enum: {
         values: [
-          "Idea",
-          "Planning",
-          "Building",
-          "Testing",
-          "Launching",
-          "Completed"
+          "idea",
+          "planning",
+          "building",
+          "testing",
+          "launching",
+          "completed"
         ],
         message: "{VALUE} is not a valid project status"
       },
-      default: "Idea"
+      default: "idea"
     },
 
     //Optional completion tracking
@@ -148,7 +148,7 @@ const ProjectSchema = new Schema(
     // Technology or topic tags e.g. ['React', 'FinTech', 'Open Source']
     tags: 
       {
-        type: String,
+        type: [String],
         default: []
       },
 
