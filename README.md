@@ -6,46 +6,45 @@ MzansiBuilds is a full-stack developer community platform where South African de
 
 Users can create project entries, share progress through milestones, collaborate with other developers and showcase completed work on a public Celebration Wall.
 
+-Register and authenticate securely
+- Create and manage development projects
+- Track project progress using defined stages
+- View projects created by other developer
+
 The platform is built using a React frontend that communicates with a Node.js and Express REST API, with MongoDB Atlas as the database. The system follows an MVC (Model-View-Controller) architectural pattern to ensure separation of concerns, scalability and maintainability.
 
 ---
 
 
-## 2. Requirements Coverage
-
-Every user journey requirement from the specification is implemented:
-
-| # | Specification Requirement | Implementation |
-|---|--------------------------|---------------|
-| 1 | Developer can create and manage own account | JWT-authenticated signup/login with profile management |
-| 2 | Create a new project entry with stage and support required | `POST /api/projects` with stage enum and `supportNeeded` field |
-| 3 | Live feed of what others are building with comments and collaboration requests | `GET /api/projects` feed with embedded comments and collaboration request flag |
-| 4 | Continuously update project progress with milestones | `POST /api/projects/:id/milestones` with visual timeline on profile |
-| 5 | Completed projects added to Celebration Wall | `PATCH /api/projects/:id/complete` → dedicated wall page |
+## 2. Features
+- User registration and login (JWT authentication)
+- Create, update, and delete projects
+- Project status tracking (idea → completed)
+- Protected routes with authorization
+- Input validation middleware for secure data handling
 
 ---
 
-
 ## 3. Tech Stack
-
-| Layer | Technology | Reason |
-|------|-----------|--------|
-| Frontend | React 18 | Component-based UI, industry standard |
-| API Calls | Axios | Clean HTTP client with support for interceptors (useful for JWT handling) |
-| Backend | Node.js + Express | Fast, lightweight REST API |
-| Database | MongoDB + Mongoose | Flexible document model suits project and milestone nesting |
-| Authentication | JSON Web Tokens (JWT) | Stateless, scalable authentication |
-| Password Hashing | bcryptjs | Industry-standard secure password storage |
-| Testing | Jest + Supertest | Unit and integration testing |
-| CI/CD | GitHub Actions | Automated testing and deployment pipeline |
-| Hosting (API) | Render | Free-tier Node.js hosting |
-| Hosting (Frontend) | Netlify | Fast static site hosting for React apps |
+Layer	            Technology
+Frontend	        React
+Backend	            Node.js + Express
+Database	        MongoDB + Mongoose
+Authentication	    JSON Web Tokens (JWT)
+Password Hashing	bcryptjs
+Hosting	Render (API), Netlif (Frontend)
 
 ---
 
 ## 4. Architecture - MVC Pattern
 
 MzansiBuilds follows MVC across both the backend and frontend:
+
+
+- Models: Define database structure (User, Project)
+- Controllers: Handle business logic and API responses
+- Routes: Define API endpoints
+- Middleware: Handle authentication, authorization, and validation
 
 
 ┌─────────────────────────────────────────────────────────────────┐
@@ -114,7 +113,8 @@ MzansiBuilds/
 │   │   └── projects.js             # /api/projects/*
 │   │
 │   ├── middleware/
-│   │   └── auth.js                 # JWT protect middleware
+        ├── authMiddleware.js      # JWT protect middleware           
+│   │   └── validateMiddleware.js               
 │   │
 │   └── utils/
 │       └── helpers.js              # generateToken() helper
@@ -159,3 +159,74 @@ MzansiBuilds/
 ├── .gitignore
 ├── CHANGELOG.md
 └── README.md
+
+
+---
+
+
+ ## 6. Security & Best Practices
+
+-  **Data Normalization:** All project statuses are normalized to lowercase in the backend to prevent case-sensitivity bugs. UI presentation is handled via CSS `text-transform: capitalize`.
+-  **Validation Middleware:** Implemented custom Express middleware to validate request bodies (Email regex, password length, and enum checks) before reaching the database layer.
+- **Secure Password Storage:** Using `bcryptjs` for one-way salting and hashing of user passwords.
+- **Stateless Auth:** JWT-based authentication ensures secure access to protected routes like project management and milestone updates.
+
+---
+
+ ## 7. Authentication
+- JWT-based authentication system
+- Token must be included in requests:
+
+Authorization: Bearer
+
+- Protected routes:
+- Create project
+- Update project
+- Delete project
+
+---
+
+ ## 8. Running Locally
+- Backend
+  - cd backend
+  - npm install
+  - npm run dev
+
+- Frontend
+  - cd client
+  - npm install
+  - npm start
+
+- Create a .env file in the backend:
+
+MONGO_URI=your_mongo_uri
+JWT_SECRET=your_secret
+
+---
+
+ ## 9. API Endpoints
+- Auth
+- POST /api/users/register
+- POST /api/users/login
+- Projects
+- GET /api/projects
+- POST /api/projects (protected)
+- PUT /api/projects/ (protected)
+- DELETE /api/projects/ (protected)
+
+---
+
+ ## 10. Summary
+
+MzansiBuilds demonstrates a full-stack MERN application with:
+
+- Structured backend architecture (MVC)
+- Secure authentication and authorization
+- Clean API design
+- Scalable and maintainable code practices
+
+---
+
+ ## 10. Live Demo
+- Backend and frontend are currently not deployed yet.
+- Deployment will be added before final submission.
