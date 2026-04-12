@@ -5,33 +5,68 @@ let uniqueValidator = require("mongoose-unique-validator");
 const bcrypt = require("bcryptjs");
 
 const UserSchema = new Schema({
-  username: {
-    type: String,
-    required: [true, "Please provide Username"],
-    unique: true
+    name: {
+        type: String,
+        required: [true, "Please provide your fullname"],
+        trim: true
+    },
 
-  },
-  password: {
-    type: String,
-    required: [true, "Please provide Password"]
-  }
+
+    email: {
+        type: String,
+        required: [true, "Please provide your email address"],
+        unique: true,
+        trim: true, //removes extra spaces
+        lowercase: true,
+        match: [/^[^\s@]+@[^\s@]+\.[^\s@]+$/, "Please provide a valid email address"]
+
+    },
+
+
+    password: {
+        type: String,
+        required: [true, "Please provide Password"],
+        minLength: [8, "Password must be at least 8 characters long"]
+    },
+
+
+    bio: {
+        type: String,
+        default: "",
+        maxLength: [300, "Bio cannot exceed 300 characters"]
+    },
+
+
+    projects: [{
+        type: Schema.Types.ObjectId,
+        ref: "Project",
+    }],
+
+
+
+timestamps: true
+
 });
 
-UserSchema.plugin(uniqueValidator, { message: "Username already exists" });
+
+
+UserSchema.plugin(uniqueValidator, { message: "{PATH} already exists" });
 
 UserSchema.pre("save", function (next) {
-    if(!this.isModified("password"))
-    { 
+    if (!this.isModified("password")) {
         return next();
     }
-    bcrypt.hash(this.password, 10)
-    .then(hash =>{
-        this.password = hash
-        next()
-    })
-    .catch(error => console.log(error))
+    bcrypt.hash(this.password, 12)// Before saving a user, hash the password using bcrypt with 12 salt rounds to ensure security
+        .then(hash => {
+            this.password = hash
+            next()
+        })
+        .catch(error => console.log(error))
 })
 
+UserSchema.methods.comparePassword = function (enteredPassword) {
+    return bcrypt.compare(enteredPassword, this.password);
+};
 
 const User = mongoose.model("User", UserSchema);
 
