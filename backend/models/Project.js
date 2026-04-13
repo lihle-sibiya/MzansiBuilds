@@ -78,10 +78,10 @@ const CommentSchema = new Schema(
 /* ==================== PROJECT ============================*/
 const ProjectSchema = new Schema(
   {
-    owner: {
+    developer: {
       type: Schema.Types.ObjectId,
       ref: "User",
-      required: [true, "Project must have an owner"]
+      required: [true, "Project must have a developer"]
     },
 
     //Project name

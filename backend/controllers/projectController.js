@@ -49,16 +49,13 @@ exports.getProject = async (req, res) => {
 // PUT /projects/:projectId - update project details or stage
 exports.updateProject = async (req, res) => {
   try {
-    const updated = await Project.findOneAndUpdate(
-      { _id: req.params.projectId, developer: req.user._id }, // double check ownership
+    const updated = await Project.findByIdAndUpdate(
+      req.params.projectId,
       req.body,
+
       { new: true, runValidators: true }
     );
-    if (!updated) {
-      return res.status(404).json({
-        message: "Project not found or you do not have permission to edit it."
-      });
-    }
+
     res.json(updated);
   } catch (error) {
     console.error(error);
@@ -69,22 +66,13 @@ exports.updateProject = async (req, res) => {
 // POST /projects/:projectId/milestones — log a milestone
 exports.addMilestone = async (req, res) => {
   try {
-    const project = await Project.findOne({
-      _id: req.params.projectId,
-      developer: req.user._id // only owner can add milestones
-    });
-    if (!project) {
-      return res.status(404).json({
-        message: "Project not found or you do not have permission to edit it."
-      });
-    }
-    project.milestones.push({
+    req.project.milestones.push({
       description: req.body.description,
       achievedAt: new Date()
     });
 
-    await project.save();
-    res.status(201).json(project);
+    await req.project.save();
+    res.status(201).json(req.project);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Server error during milestone addition" });
@@ -100,9 +88,9 @@ exports.addComment = async (req, res) => {
     }
 
     project.comments.push({
-      text: req.body.text,
-      developer: req.user._id,
-      createdAt: new Date()
+      userId: req.user._id,
+      username: req.user.name,
+      body: req.body.body     
     });
 
     await project.save();
@@ -154,22 +142,12 @@ exports.requestCollaboration = async (req, res) => {
 // PUT /projects/:projectId/complete — mark project as completed
 exports.completeProject = async (req, res) => {
   try {
-    const project = await Project.findOne({
-      _id: req.params.projectId,
-      developer: req.user._id
-    }); // only owner can complete
-
-    if (!project) {
-      return res.status(404).json({
-        message: "Project not found or you do not have permission to edit it."
-      });
-    }
-    project.status = "completed";
-    project.completedAt = new Date();
-    await project.save();
+    req.project.status = "completed";
+    req.project.completedAt = new Date();
+    await req.project.save();
     res.json({
       message: "Project completed! You are on the Celebration Wall 🎉",
-      project
+      project: req.project
     });
   } catch (error) {
     console.error(error);
@@ -193,15 +171,8 @@ exports.getCelebrationWall = async (req, res) => {
 // DELETE /projects/:projectId — delete a project
 exports.deleteProject = async (req, res) => {
   try {
-    const deleted = await Project.findOneAndDelete({
-      _id: req.params.projectId,
-      developer: req.user._id // only owner can delete
-    });
-    if (!deleted) {
-      return res.status(404).json({
-        message: "Project not found or you do not have permission to delete it."
-      });
-    }
+    await req.project.deleteOne();
+
     res.json({ message: "Project deleted successfully" });
   } catch (error) {
     console.error(error);
