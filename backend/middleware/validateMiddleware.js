@@ -49,12 +49,12 @@ const validateSignup = async (req, res, next) => {
 //Validate project fields
 const validateProject = (req, res, next) => {
   const { title, description, status, supportNeeded } = req.body;
-  if (!title?.trim() || !description?.trim() || !status || !supportNeeded?.trim()) {
+  if (!title?.trim() || !description?.trim() || !status?.trim() ) {
     return res
       .status(400)
       .json({
         message:
-          "Missing required fields. Title, description, status, and supportNeeded are required."
+          "Missing required fields. Title, description, status are required."
       });
   }
 

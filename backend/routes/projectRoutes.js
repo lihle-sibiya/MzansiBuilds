@@ -3,7 +3,7 @@
 const router = require("express").Router();
 const projectController = require("../controllers/projectController");
 const{verifyToken, isProjectOwner} = require("../middleware/authMiddleware");
-const {validateProject} = require("../middleware/validationMiddleware");
+const {validateProject} = require("../middleware/validateMiddleware");
 
 //Celebration wall
 router.get("/celebration", projectController.getCelebrationWall);

@@ -130,7 +130,7 @@ const ProjectSchema = new Schema(
     },
 
     supportNeeded: {
-      type: [String],
+      type: String,
       enum: {
         values: [
           "None",
@@ -142,7 +142,7 @@ const ProjectSchema = new Schema(
         message: "{VALUE} is not a valid support type"
       },
 
-      default: ["None"]
+      default: "None"
     },
 
     // Technology or topic tags e.g. ['React', 'FinTech', 'Open Source']

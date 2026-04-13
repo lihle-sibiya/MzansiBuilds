@@ -1,7 +1,7 @@
 "use strict";
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-let uniqueValidator = require("mongoose-unique-validator");
+const uniqueValidator = require("mongoose-unique-validator").default;
 const bcrypt = require("bcryptjs");
 
 const UserSchema = new Schema({
@@ -51,19 +51,21 @@ timestamps: true
 
 UserSchema.plugin(uniqueValidator, { message: "{PATH} already exists" });
 
-UserSchema.pre("save", function (next) {
-    if (!this.isModified("password")) {
-        return next();
-    }
-    bcrypt.hash(this.password, 12)// Before saving a user, hash the password using bcrypt with 12 salt rounds to ensure security
-        .then(hash => {
-            this.password = hash
-            next()
-        })
-        .catch(error => console.log(error))
-})
+UserSchema.pre("save", async function () {
+    // Only hash the password if it has been modified or is new
+   if (!this.isModified("password")) return;
+
+  try {
+    const hash = await bcrypt.hash(this.password, 12);
+    this.password = hash;
+  } catch (err) {
+    console.error("Password hashing error:", err);
+  }
+});
+
 
 UserSchema.methods.comparePassword = function (enteredPassword) {
+    // "this.password" is the hashed password in the Database
     return bcrypt.compare(enteredPassword, this.password);
 };
 

@@ -3,7 +3,7 @@
 const router = require("express").Router();
 const userController = require("../controllers/userController");
 const { verifyToken } = require("../middleware/authMiddleware");
-const {validateSignup} = require("../middleware/validationMiddleware");
+const {validateSignup} = require("../middleware/validateMiddleware");
 
 //Auth routes (public)
 router.post("/signup", validateSignup, userController.signup);

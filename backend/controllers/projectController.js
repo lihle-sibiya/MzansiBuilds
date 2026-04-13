@@ -67,6 +67,7 @@ exports.updateProject = async (req, res) => {
 exports.addMilestone = async (req, res) => {
   try {
     req.project.milestones.push({
+       title: req.body.title,
       description: req.body.description,
       achievedAt: new Date()
     });
