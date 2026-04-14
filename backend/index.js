@@ -18,18 +18,9 @@ const app = express(); //create server
 
 //Attach the cors and express.json() middleware that express will use
 app.use(cors({
-  origin: "http://localhost:5173"
+  origin: "https://mzansibuildsapp.netlify.app"
 }));
 app.use(express.json());
-
-
-// Serve static React files
-app.use(express.static(path.join(__dirname, '../client/dist')));
-
-// Catch-all: send React app for any non-API route
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/dist', 'index.html'));
-});
 
 
 //Homepage
