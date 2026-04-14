@@ -1,4 +1,3 @@
-// Profile.js
 // Shows a user's profile and their projects
 // Owner can edit bio/name or delete their account
 

@@ -12,9 +12,9 @@ export default function Home() {
       try {
         const res = await getProjects();
 
-        console.log("API RESPONSE:", res.data); // 👈 DEBUG LINE
+        console.log("API RESPONSE:", res.data); 
 
-        // ✅ FIX: handle both array OR object response
+      
         const data = res.data;
 
         if (Array.isArray(data)) {

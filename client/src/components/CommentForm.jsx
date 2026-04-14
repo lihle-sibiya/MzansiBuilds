@@ -1,4 +1,3 @@
-// CommentForm.js
 // Lets a logged-in user post a comment on a project (POST /projects/:id/comments)
 // Calls onCommentAdded(updatedProject) so the parent can refresh its state
 

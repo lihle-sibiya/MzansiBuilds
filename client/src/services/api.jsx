@@ -1,6 +1,4 @@
-// api.js — All HTTP calls to the Express backend using Axios
-// Backend runs on http://localhost:5000
-// Vite proxy forwards /users and /projects automatically
+// All HTTP calls to the Express backend using Axios
 
 import axios from "axios";
 
@@ -19,7 +17,7 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
-// ── USER ROUTES (matches userRoutes.js) 
+// USER ROUTES (matches userRoutes.js) 
 export const signup        = (data)           => api.post("/users/signup", data);
 export const login         = (data)           => api.post("/users/login", data);
 export const getUser       = (userId)         => api.get(`/users/${userId}`);
@@ -27,7 +25,7 @@ export const updateUser    = (userId, data)   => api.put(`/users/${userId}`, dat
 export const deleteAccount = (userId)         => api.delete(`/users/${userId}`);
 export const getUserProjects = (userId)       => api.get(`/users/${userId}/projects`);
 
-// ── PROJECT ROUTES (matches projectRoutes.js) 
+// PROJECT ROUTES (matches projectRoutes.js) 
 export const getProjects    = ()                    => api.get("/projects");
 export const getProject     = (id)                  => api.get(`/projects/${id}`);
 export const createProject  = (data)                => api.post("/projects", data);

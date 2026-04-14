@@ -1,4 +1,3 @@
-// CelebrationWall.js
 // Fetches GET /projects/celebration — all projects with status "completed"
 // Displays them in a grid with a celebratory banner
 

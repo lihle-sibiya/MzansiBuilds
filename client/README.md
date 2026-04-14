@@ -48,7 +48,12 @@ A developer collaboration platform where builders share live progress, track mil
 - RESTful API design
 - Modular frontend structure
 
-UML diagram available in `/docs`
+UML diagram and architecture diagram available  in `/docs`
+📁 Location: `/uml.png`
+![UML Diagram](./docs/uml.png)
+
+📁 Location: `/architecture.png`
+![Architecture Diagram](./docs/architecture.png)
 
 ---
 
@@ -81,3 +86,36 @@ npm run dev
 ✔ Core Features Implemented  
 ✔ Testing Setup Complete  
 ✔ Ready for Deployment
+
+## 🖼️ Application Screenshots
+
+### 🎨 Frontend (User Interface)
+
+Below is the main user interface of MzansiBuilds showcasing the live project feed, collaboration features and community engagement.
+
+📁 Location: `/docs/frontend-ui.png`
+
+![Frontend UI](./docs/frontend-ui.png)
+
+---
+
+### ⚙️ Backend (API / Server Response)
+
+Below is a snapshot of the backend API showing successful responses from key endpoints such as projects and users.
+
+📁 Location: `/docs/backend-api.png`
+
+![Backend API](./docs/backend-api.png)
+
+
+---
+
+### 📬 API Testing (Postman)
+
+All endpoints were tested using Postman to validate backend functionality.
+
+📁 Location: `/docs/postman/`
+
+- Authentication endpoints tested (login/signup)
+- Project CRUD operations tested
+- Collaboration and comments tested

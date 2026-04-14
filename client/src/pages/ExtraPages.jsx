@@ -1,5 +1,3 @@
-// ExtraPages.js
-
 import { useState, useEffect } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import { login, signup, createProject, updateProject, getProject } from "../services/api";

@@ -1,5 +1,4 @@
-// ProjectCard.js
-// Shows a single project summary — used in ProjectFeed and Profile
+// Shows a single project summary - used in ProjectFeed and Profile
 
 import { useNavigate } from "react-router-dom";
 

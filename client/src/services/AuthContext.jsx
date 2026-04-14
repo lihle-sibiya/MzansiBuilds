@@ -1,4 +1,3 @@
-// AuthContext.jsx
 // Provides user + token to the whole app so any component can check if logged in
 
 import { createContext, useContext, useState, useEffect } from "react";

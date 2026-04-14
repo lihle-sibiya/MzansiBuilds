@@ -1,4 +1,3 @@
-// Navbar.js
 // Top navigation bar — shows different links depending on login state
 
 import { Link, useNavigate } from "react-router-dom";

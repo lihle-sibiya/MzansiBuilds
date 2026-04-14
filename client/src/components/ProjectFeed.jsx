@@ -1,4 +1,3 @@
-// ProjectFeed.js
 // Fetches all projects from GET /projects and renders them in a filterable grid
 // Re-fetches every 30 seconds to give a "live" feel
 

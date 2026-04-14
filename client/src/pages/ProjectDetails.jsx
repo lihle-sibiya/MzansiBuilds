@@ -1,4 +1,3 @@
-// ProjectDetails.js
 // Full project view: details, milestones, comments, collaborate button
 // Owner can edit, mark complete, delete
 // Any logged-in user can comment or raise hand to collaborate
@@ -81,8 +80,7 @@ export default function ProjectDetails() {
     }
   }
 
-  // if (loading) return <div className="spinner-wrap"><div className="spinner" /></div>;
-  if (loading) {
+    if (loading) {
   return (
     <div className="spinner-wrap">
       <div className="spinner" />

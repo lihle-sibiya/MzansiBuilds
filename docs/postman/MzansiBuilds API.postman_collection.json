@@ -1,0 +1,340 @@
+{
+  "info": {
+    "_postman_id": "37ebf5b4-20a1-4684-af50-185d4a93c19c",
+    "name": "MzansiBuilds API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "28782081"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Signup",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"Test Developer\",\r\n    \"email\": \"test@gmail.com\",\r\n    \"password\": \"password123\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/users/signup",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "users",
+                "signup"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"test2@gmail.com\",\r\n    \"password\": \"password124\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/users/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "users",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "item": []
+    },
+    {
+      "name": "Projects",
+      "item": [
+        {
+          "name": "Create project",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZGQxYTJjNjRmM2U1ZjUyMGFmMGEwYSIsImlhdCI6MTc3NjA5OTExNiwiZXhwIjoxNzc2NzAzOTE2fQ.v9i0Dr9kGUXH3EscJUrA3zuzhhVWvzCZf_Sl0Vg6OtU",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"title\": \"My First Project\",\r\n  \"description\": \"Building in public on MzansiBuilds\",\r\n  \"status\": \"building\",\r\n  \"supportNeeded\": \"Feedback\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/projects",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "projects"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get live feed",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/projects",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "projects"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Add milestone",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZGQxYTJjNjRmM2U1ZjUyMGFmMGEwYSIsImlhdCI6MTc3NjEwMDY4NywiZXhwIjoxNzc2NzA1NDg3fQ.FyO0wigoWWA0Lr5yKFRssVYauK295zwRMCd1w0J8lJI",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"title\": \"API milestone\",\r\n  \"description\": \"Completed the API\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/projects/69dd1f8baa6cac11e395b925/milestones",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "projects",
+                "69dd1f8baa6cac11e395b925",
+                "milestones"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Add comment",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZGQxYTJjNjRmM2U1ZjUyMGFmMGEwYSIsImlhdCI6MTc3NjEwMDY4NywiZXhwIjoxNzc2NzA1NDg3fQ.FyO0wigoWWA0Lr5yKFRssVYauK295zwRMCd1w0J8lJI",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"body\": \"This looks great!\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/projects/69dd1f8baa6cac11e395b925/comments",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "projects",
+                "69dd1f8baa6cac11e395b925",
+                "comments"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Complete project → Celebration Wall",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZGQxYTJjNjRmM2U1ZjUyMGFmMGEwYSIsImlhdCI6MTc3NjEwMTY5NCwiZXhwIjoxNzc2NzA2NDk0fQ.Bvq9iu65gfuXCAytpatZIeRR0RyBcM6ZCHA7g9aQsYY",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/projects/69dd1f8baa6cac11e395b925/complete",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "projects",
+                "69dd1f8baa6cac11e395b925",
+                "complete"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Celebration Wall",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/projects/celebration",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "projects",
+                "celebration"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Raise hand - collaboration request",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZGQyYWRiMmYwNzRiMGU4YjAyODBiMSIsImlhdCI6MTc3NjEwMjEzNywiZXhwIjoxNzc2NzA2OTM3fQ.bgs2iRmptNaEIieV3YSMKz0o4HXedxzFBEGHlJ81ACw",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/projects/69dd1f8baa6cac11e395b925/collaborate",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "projects",
+                "69dd1f8baa6cac11e395b925",
+                "collaborate"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
