@@ -17,12 +17,9 @@ connectDB(); // Connect to the database
 const app = express(); //create server
 
 //Attach the cors and express.json() middleware that express will use
-// app.use(cors({
-//   origin: "http://localhost:5173"
-// }));
-
-
-app.use(cors()); // In a single-URL deploy
+app.use(cors({
+  origin: "http://localhost:5173"
+}));
 app.use(express.json());
 
 
