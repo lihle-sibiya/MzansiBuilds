@@ -5,6 +5,9 @@ const cors = require("cors");
 const connectDB = require("./config/db");
 const dotenv = require("dotenv");
 
+const User = require("./models/User");
+const Project = require("./models/Project");
+
 dotenv.config(); // Load environment variables from .env file
 
 connectDB(); // Connect to the database
@@ -18,10 +21,40 @@ app.use(cors({
 app.use(express.json());
 
 
-// Welcome route
+const path = require("path");
+
+//Homepage
 app.get("/", (req, res) => {
-    res.send("Welcome to Mzansi Builds API");
+   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
+
+// Serve static files from the "public" directory
+app.use(express.static(path.join(__dirname, "public")));
+
+
+//Dashboard route 
+app.get("/api/dashboard", async (req, res) => {
+  try {
+    const totalUsers = await User.countDocuments();
+    const totalProjects = await Project.countDocuments();
+    const completedProjects = await Project.countDocuments({ status: "completed" });
+    const activeProjects = await Project.countDocuments({ status: { $ne: "completed" } });
+
+    res.json({
+      totalUsers,
+      totalProjects,
+      completedProjects,
+      activeProjects,
+      status: "online",
+      message: "API Healthy"
+    });
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Dashboard error" });
+  }
+});
+
 
 // API routes
 app.use("/api/users", require("./routes/userRoutes"));

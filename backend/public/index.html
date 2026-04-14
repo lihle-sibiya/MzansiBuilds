@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MzansiBuilds API</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, sans-serif;
+      background: radial-gradient(circle at top, #0f0f0f, #000);
+      color: white;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 60px 20px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 6px 12px;
+      border: 1px solid #2ecc71;
+      border-radius: 20px;
+      font-size: 12px;
+      color: #2ecc71;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: 44px;
+      margin: 10px 0;
+      color: #2ecc71;
+    }
+
+    .subtitle {
+      opacity: 0.8;
+      max-width: 750px;
+      line-height: 1.6;
+    }
+
+    .status {
+      margin-top: 20px;
+      font-size: 13px;
+      color: #aaa;
+    }
+
+    .dot {
+      height: 8px;
+      width: 8px;
+      background: #2ecc71;
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: 6px;
+      box-shadow: 0 0 10px #2ecc71;
+    }
+
+    /* GRID */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 15px;
+      margin-top: 40px;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(46,204,113,0.2);
+      border-radius: 12px;
+      padding: 20px;
+      transition: 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: #2ecc71;
+    }
+
+    .card h3 {
+      margin: 0 0 10px;
+      color: #2ecc71;
+      font-size: 15px;
+    }
+
+    .card p {
+      font-size: 13px;
+      opacity: 0.8;
+      line-height: 1.5;
+    }
+
+    /* DASHBOARD NUMBERS */
+    .num {
+      font-size: 34px;
+      color: #2ecc71;
+      font-weight: bold;
+    }
+
+    .label {
+      font-size: 12px;
+      opacity: 0.8;
+      margin-top: 5px;
+    }
+
+    .footer {
+      margin-top: 60px;
+      font-size: 12px;
+      opacity: 0.5;
+      text-align: center;
+    }
+
+    .section-title {
+      margin-top: 50px;
+      margin-bottom: 10px;
+      font-size: 18px;
+      color: #2ecc71;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+    <!-- HEADER -->
+    <div class="badge">⚡ Developer Collaboration Platform API</div>
+
+    <h1>MzansiBuilds</h1>
+
+    <p class="subtitle">
+      A developer ecosystem where builders share live progress,
+      collaborate on projects, track milestones and build in public.
+      Designed for accountability, visibility and real-world growth.
+    </p>
+
+    <p class="status">
+      <span class="dot"></span> MzansiBuilds Live • Developers Building in Public
+    </p>
+
+    <!-- DASHBOARD -->
+    <div class="section-title">📊 Live System Stats</div>
+
+    <div class="grid">
+
+      <div class="card">
+        <div class="num" id="users">0</div>
+        <div class="label">Developers</div>
+      </div>
+
+      <div class="card">
+        <div class="num" id="projects">0</div>
+        <div class="label">Projects</div>
+      </div>
+
+      <div class="card">
+        <div class="num" id="active">0</div>
+        <div class="label">Active Builds</div>
+      </div>
+
+      <div class="card">
+        <div class="num" id="completed">0</div>
+        <div class="label">Completed</div>
+      </div>
+
+    </div>
+
+    <!-- FEATURES -->
+    <div class="section-title">🚀 Platform Features</div>
+
+    <div class="grid">
+
+      <div class="card">
+        <h3>🔥 Live Project Feed</h3>
+        <p>Developers publish real-time project updates from idea to completion.</p>
+      </div>
+
+      <div class="card">
+        <h3>💡 Milestone Tracking</h3>
+        <p>Break projects into stages and track progress visually.</p>
+      </div>
+
+      <div class="card">
+        <h3>🤝 Collaboration System</h3>
+        <p>Developers can request to join and contribute to active projects.</p>
+      </div>
+
+      <div class="card">
+        <h3>💬 Community Feedback</h3>
+        <p>Comment system for peer review, support and engagement.</p>
+      </div>
+
+      <div class="card">
+        <h3>🎉 Celebration Wall</h3>
+        <p>Completed projects are showcased as achievements.</p>
+      </div>
+
+      <div class="card">
+        <h3>⚙️ Secure API</h3>
+        <p>JWT authentication, protected routes and role-based access.</p>
+      </div>
+
+    </div>
+
+    <div class="footer">
+      Built with Node.js • Express • MongoDB • React Frontend
+    </div>
+
+  </div>
+
+  <script>
+    async function loadDashboard() {
+      try {
+        const res = await fetch("/api/projects");
+        const projects = await res.json();
+
+        const total = projects.length;
+        const completed = projects.filter(p => p.status === "completed").length;
+        const active = total - completed;
+
+        document.getElementById("projects").innerText = total;
+        document.getElementById("completed").innerText = completed;
+        document.getElementById("active").innerText = active;
+
+        document.getElementById("users").innerText = "1+";
+
+      } catch (err) {
+        console.log("Dashboard error:", err);
+      }
+    }
+
+    loadDashboard();
+  </script>
+
+</body>
+</html>

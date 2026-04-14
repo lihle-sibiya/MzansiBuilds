@@ -6,7 +6,7 @@ import axios from "axios";
 
 // Create one axios instance for the whole app
 const api = axios.create({
-  baseURL: "/",                            // uses Vite proxy
+  baseURL: "http://localhost:5000/api",                            
   headers: { "Content-Type": "application/json" },
 });
 

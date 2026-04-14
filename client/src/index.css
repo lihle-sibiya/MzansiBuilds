@@ -1,0 +1,241 @@
+/* ── Google Font ─────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700;800&family=DM+Mono:wght@400;500&display=swap');
+
+/* ── Design Tokens ───────────────────────────────────────── */
+:root {
+  --green:       #22c55e;
+  --green-light: #4ade80;
+  --green-dark:  #15803d;
+  --black:       #070d09;
+  --surface:     #0f1a12;
+  --surface2:    #172219;
+  --border:      #1e3326;
+  --white:       #f0fdf4;
+  --muted:       #6b9c7a;
+  --danger:      #f87171;
+  --radius:      8px;
+  --font:        'DM Sans', sans-serif;
+  --mono:        'DM Mono', monospace;
+}
+
+/* ── Reset ───────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font); background: var(--black); color: var(--white); line-height: 1.6; }
+a    { color: var(--green); text-decoration: none; }
+a:hover { color: var(--green-light); }
+button { cursor: pointer; font-family: var(--font); }
+input, textarea, select {
+  font-family: var(--font);
+  background: var(--surface2);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--white);
+  padding: 0.6rem 0.9rem;
+  width: 100%;
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+input:focus, textarea:focus, select:focus { border-color: var(--green); }
+select option { background: var(--surface); }
+textarea { resize: vertical; }
+
+/* ── Buttons ─────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border: none;
+  border-radius: var(--radius);
+  padding: 0.55rem 1.2rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+  transition: opacity 0.2s, transform 0.15s;
+}
+.btn:hover:not(:disabled) { opacity: 0.88; transform: translateY(-1px); }
+.btn:disabled { opacity: 0.45; cursor: not-allowed; }
+.btn-green  { background: var(--green); color: var(--black); }
+.btn-outline { background: transparent; color: var(--green); border: 1.5px solid var(--green); }
+.btn-danger { background: transparent; color: var(--danger); border: 1.5px solid var(--danger); }
+.btn-outline:hover:not(:disabled) { background: var(--green); color: var(--black); }
+.btn-danger:hover:not(:disabled)  { background: var(--danger); color: white; }
+.btn-full { width: 100%; justify-content: center; }
+
+/* ── Navbar ──────────────────────────────────────────────── */
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.9rem 2rem;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+.nav-brand { font-size: 1.15rem; font-weight: 800; color: var(--green-light); }
+.nav-links  { display: flex; align-items: center; gap: 0.75rem; }
+.nav-links a { font-size: 0.88rem; font-weight: 600; color: var(--muted); }
+.nav-links a:hover { color: var(--white); }
+
+/* ── Page wrapper ────────────────────────────────────────── */
+.page { max-width: 1100px; margin: 0 auto; padding: 2rem 1.5rem; }
+
+/* ── Card ────────────────────────────────────────────────── */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.25rem;
+}
+
+/* ── Grid ────────────────────────────────────────────────── */
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 1rem; }
+
+/* ── Status badge ────────────────────────────────────────── */
+.badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  font-family: var(--mono);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+}
+.badge-green  { background: #14532d44; color: var(--green-light); }
+.badge-yellow { background: #78350f44; color: #fbbf24; }
+.badge-blue   { background: #1e3a5f44; color: #60a5fa; }
+.badge-orange { background: #7c2d1244; color: #fb923c; }
+.badge-purple { background: #4c1d9544; color: #a78bfa; }
+.badge-muted  { background: var(--surface2); color: var(--muted); }
+
+/* ── Tags ────────────────────────────────────────────────── */
+.tags { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+.tag  { font-size: 0.7rem; font-family: var(--mono); color: var(--green); background: #14532d22; border: 1px solid #14532d; padding: 0.1rem 0.5rem; border-radius: 4px; }
+
+/* ── Section heading ─────────────────────────────────────── */
+.section-title { font-size: 1.2rem; font-weight: 800; margin-bottom: 1.25rem; }
+.muted { color: var(--muted); font-size: 0.88rem; }
+
+/* ── Filter bar ──────────────────────────────────────────── */
+.filters { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.25rem; }
+.filter-btn {
+  background: var(--surface);
+  color: var(--muted);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.3rem 0.9rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.filter-btn.active, .filter-btn:hover { background: var(--green); color: var(--black); border-color: var(--green); }
+
+/* ── Forms ───────────────────────────────────────────────── */
+.form-box {
+  max-width: 500px;
+  margin: 0 auto;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 2rem;
+}
+.form-box h2 { font-size: 1.4rem; font-weight: 800; margin-bottom: 0.25rem; }
+.form-box p  { color: var(--muted); font-size: 0.88rem; margin-bottom: 1.5rem; }
+.form-group  { display: flex; flex-direction: column; gap: 0.35rem; margin-bottom: 1rem; }
+.form-label  { font-size: 0.78rem; font-weight: 700; color: var(--muted); font-family: var(--mono); }
+.form-row    { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.form-error  { background: #7f1d1d33; border: 1px solid #ef4444; border-radius: var(--radius); padding: 0.5rem 0.9rem; color: #fca5a5; font-size: 0.83rem; margin-bottom: 0.75rem; }
+.form-switch { text-align: center; margin-top: 1rem; font-size: 0.85rem; color: var(--muted); }
+
+/* ── Spinner ─────────────────────────────────────────────── */
+.spinner-wrap { display: flex; justify-content: center; padding: 4rem; }
+.spinner { width: 32px; height: 32px; border: 3px solid var(--border); border-top-color: var(--green); border-radius: 50%; animation: spin 0.7s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── Empty state ─────────────────────────────────────────── */
+.empty { text-align: center; color: var(--muted); padding: 2.5rem; font-size: 0.9rem; }
+
+/* ── Hero (Home) ─────────────────────────────────────────── */
+.hero { padding: 3.5rem 0 2.5rem; border-bottom: 1px solid var(--border); margin-bottom: 2.5rem; }
+.hero h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 800; line-height: 1.15; margin-bottom: 0.75rem; }
+.hero h1 span { color: var(--green-light); }
+.hero p  { color: var(--muted); max-width: 480px; margin-bottom: 1.5rem; }
+.hero-btns { display: flex; gap: 0.75rem; }
+
+/* ── Live dot ────────────────────────────────────────────── */
+.live { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1.25rem; }
+.live-dot { width: 8px; height: 8px; background: #ef4444; border-radius: 50%; animation: pulse 1.4s infinite; }
+.live span { font-size: 0.78rem; color: #ef4444; font-family: var(--mono); }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+/* ── Project card ────────────────────────────────────────── */
+.pcard { cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; }
+.pcard:hover { transform: translateY(-3px); box-shadow: 0 6px 24px rgba(34,197,94,0.12); border-color: #1a3d25; }
+.pcard-top { display: flex; gap: 0.4rem; align-items: center; margin-bottom: 0.6rem; }
+.pcard h3  { font-size: 1rem; font-weight: 700; margin-bottom: 0.35rem; }
+.pcard p   { font-size: 0.83rem; color: var(--muted); line-height: 1.5; margin-bottom: 0.6rem; }
+.pcard-footer { display: flex; justify-content: space-between; align-items: center; padding-top: 0.6rem; border-top: 1px solid var(--border); margin-top: auto; }
+.pcard-dev   { font-size: 0.75rem; color: var(--muted); font-family: var(--mono); }
+.pcard-stats { display: flex; gap: 0.75rem; font-size: 0.75rem; color: var(--muted); }
+
+/* ── Project Details ─────────────────────────────────────── */
+.detail-header { margin-bottom: 1.5rem; }
+.detail-header h1 { font-size: 1.8rem; font-weight: 800; margin: 0.5rem 0; }
+.detail-desc  { color: var(--muted); line-height: 1.7; margin: 0.75rem 0; }
+.detail-actions { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-top: 1rem; }
+.detail-section { margin-top: 2rem; }
+.detail-section h3 { font-size: 1rem; font-weight: 700; margin-bottom: 1rem; }
+
+/* ── Milestones ──────────────────────────────────────────── */
+.milestone-list { display: flex; flex-direction: column; gap: 0.6rem; }
+.milestone-item { display: flex; gap: 0.75rem; align-items: flex-start; background: var(--surface2); border-left: 3px solid var(--green); border-radius: var(--radius); padding: 0.75rem 1rem; }
+.ms-dot { width: 9px; height: 9px; background: var(--green); border-radius: 50%; margin-top: 5px; flex-shrink: 0; }
+.ms-body strong { font-size: 0.9rem; }
+.ms-body p { font-size: 0.82rem; color: var(--muted); }
+.ms-date { font-size: 0.72rem; color: var(--muted); font-family: var(--mono); }
+
+/* ── Comments ────────────────────────────────────────────── */
+.comment-list { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1rem; }
+.comment-item { display: flex; gap: 0.75rem; }
+.comment-avatar { width: 34px; height: 34px; border-radius: 50%; background: var(--green-dark); color: var(--green-light); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.85rem; flex-shrink: 0; }
+.comment-body strong { font-size: 0.83rem; }
+.comment-date { font-size: 0.7rem; color: var(--muted); font-family: var(--mono); margin-left: 0.5rem; }
+.comment-body p { font-size: 0.85rem; color: var(--muted); }
+.comment-form-row { display: flex; align-items: flex-end; gap: 0.6rem; margin-bottom: 0.5rem; }
+.comment-form-row textarea { flex: 1; }
+.char { font-size: 0.72rem; color: var(--muted); font-family: var(--mono); margin-bottom: 0.5rem; }
+
+/* ── Profile ─────────────────────────────────────────────── */
+.profile-card { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 0.6rem; margin-bottom: 2rem; padding: 2rem; }
+.profile-avatar { width: 72px; height: 72px; border-radius: 50%; background: var(--green-dark); color: var(--green-light); display: flex; align-items: center; justify-content: center; font-size: 1.8rem; font-weight: 800; border: 3px solid var(--green); margin-bottom: 0.5rem; }
+.profile-card h2 { font-size: 1.4rem; font-weight: 800; }
+.profile-card .email { font-family: var(--mono); font-size: 0.8rem; color: var(--muted); }
+.profile-card .bio  { color: var(--muted); font-size: 0.9rem; max-width: 420px; }
+.profile-btns { display: flex; gap: 0.6rem; margin-top: 0.5rem; }
+
+/* ── Celebration Wall ────────────────────────────────────── */
+.celeb-header { text-align: center; padding: 2.5rem 0 2rem; }
+.celeb-header h1 { font-size: 2rem; font-weight: 800; }
+.celeb-header p  { color: var(--muted); margin-top: 0.4rem; }
+.celeb-card { overflow: hidden; transition: transform 0.2s; cursor: pointer; }
+.celeb-card:hover { transform: translateY(-3px); }
+.celeb-banner { background: linear-gradient(90deg, var(--green-dark), var(--green)); text-align: center; padding: 0.4rem; font-size: 0.9rem; }
+.celeb-body { padding: 1rem; }
+.celeb-body h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.3rem; }
+.celeb-dev  { font-size: 0.78rem; color: var(--muted); font-family: var(--mono); }
+.celeb-desc { font-size: 0.82rem; color: var(--muted); margin: 0.4rem 0; }
+.celeb-date { font-size: 0.72rem; color: var(--muted); font-family: var(--mono); }
+
+/* ── Action message ──────────────────────────────────────── */
+.msg-success { background: #14532d44; border: 1px solid var(--green-dark); color: var(--green-light); padding: 0.6rem 1rem; border-radius: var(--radius); font-size: 0.88rem; margin-top: 0.5rem; }
+
+/* ── Responsive ──────────────────────────────────────────── */
+@media (max-width: 640px) {
+  nav { padding: 0.75rem 1rem; }
+  .page { padding: 1.25rem 1rem; }
+  .form-row { grid-template-columns: 1fr; }
+  .form-box { padding: 1.25rem; }
+  .hero h1 { font-size: 1.8rem; }
+}
