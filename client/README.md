@@ -120,5 +120,15 @@ All endpoints were tested using Postman to validate backend functionality.
 - Project CRUD operations tested
 - Collaboration and comments tested
 
-Live Demo:
-Fronted: https://mzansibuildsapp.netlify.app/
+
+---
+
+### 🌍 Live Demo
+
+🚀 Frontend (Netlify)
+
+https://mzansibuildsapp.netlify.app
+
+⚙️ Backend (Render API)
+
+https://mzansibuildsapp.onrender.com

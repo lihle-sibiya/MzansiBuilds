@@ -4,7 +4,7 @@ import axios from "axios";
 
 // Create one axios instance for the whole app
 const api = axios.create({
-  baseURL: "https://mzansibuildsapp.netlify.app/api",                            
+  baseURL: "https://mzansibuildsapp.onrender.com/api",                            
   headers: { "Content-Type": "application/json" },
 });
 
