@@ -4,7 +4,7 @@ import axios from "axios";
 
 // Create one axios instance for the whole app
 const api = axios.create({
-  baseURL: "http://localhost:5000/api",                            
+  baseURL: "/api",                            
   headers: { "Content-Type": "application/json" },
 });
 

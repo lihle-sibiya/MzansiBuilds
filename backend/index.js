@@ -8,6 +8,8 @@ const dotenv = require("dotenv");
 const User = require("./models/User");
 const Project = require("./models/Project");
 
+const path = require("path");
+
 dotenv.config(); // Load environment variables from .env file
 
 connectDB(); // Connect to the database
@@ -15,13 +17,23 @@ connectDB(); // Connect to the database
 const app = express(); //create server
 
 //Attach the cors and express.json() middleware that express will use
-app.use(cors({
-  origin: "http://localhost:5173"
-}));
+// app.use(cors({
+//   origin: "http://localhost:5173"
+// }));
+
+
+app.use(cors()); // In a single-URL deploy
 app.use(express.json());
 
 
-const path = require("path");
+// Serve static React files
+app.use(express.static(path.join(__dirname, '../client/dist')));
+
+// Catch-all: send React app for any non-API route
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/dist', 'index.html'));
+});
+
 
 //Homepage
 app.get("/", (req, res) => {
