@@ -119,3 +119,6 @@ All endpoints were tested using Postman to validate backend functionality.
 - Authentication endpoints tested (login/signup)
 - Project CRUD operations tested
 - Collaboration and comments tested
+
+Live Demo:
+Fronted: https://mzansibuildsapp.netlify.app/
