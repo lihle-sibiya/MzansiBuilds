@@ -12,7 +12,9 @@ connectDB(); // Connect to the database
 const app = express(); //create server
 
 //Attach the cors and express.json() middleware that express will use
-app.use(cors());
+app.use(cors({
+  origin: "http://localhost:5173"
+}));
 app.use(express.json());
 
 
@@ -29,6 +31,12 @@ app.use("/api/projects", require("./routes/projectRoutes"));
 // 404 handler
 app.use((req, res) => {
   res.status(404).json({ error: 'Not Found' });
+});
+
+// Global Error Handler
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ error: 'Something went wrong on our end!' });
 });
 
 
