@@ -92,6 +92,14 @@ npm run dev
 
 ---
 
+## 🧪 Testing
+- Unit testing implemented using Jest
+- 2 core unit tests executed successfully
+- All tests passing ✔
+
+
+---
+
 ## 🎯 Status
 
 ✔ MVP Completed  
