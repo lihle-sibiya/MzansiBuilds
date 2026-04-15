@@ -1,232 +1,205 @@
-"# MzansiBuilds" 
+# 🚀 MzansiBuilds
 
-## 1. Project Overview
-
-MzansiBuilds is a full-stack developer community platform where South African developers can build in public. 
-
-Users can create project entries, share progress through milestones, collaborate with other developers and showcase completed work on a public Celebration Wall.
-
--Register and authenticate securely
-- Create and manage development projects
-- Track project progress using defined stages
-- View projects created by other developer
-
-The platform is built using a React frontend that communicates with a Node.js and Express REST API, with MongoDB Atlas as the database. The system follows an MVC (Model-View-Controller) architectural pattern to ensure separation of concerns, scalability and maintainability.
+A developer collaboration platform where builders share live progress, track milestones and collaborate on real-world projects.
 
 ---
 
+## 🌐 Features
 
-## 2. Features
-- User registration and login (JWT authentication)
-- Create, update, and delete projects
-- Project status tracking (idea → completed)
-- Protected routes with authorization
-- Input validation middleware for secure data handling
-
----
-
-## 3. Tech Stack
-Layer	            Technology
-Frontend	        React
-Backend	            Node.js + Express
-Database	        MongoDB + Mongoose
-Authentication	    JSON Web Tokens (JWT)
-Password Hashing	bcryptjs
-Hosting	Render (API), Netlif (Frontend)
+- 🔥 Live Project Feed (Build in Public updates)
+- 💡 Milestone Tracking system
+- 🤝 Collaboration requests between developers
+- 💬 Community comments & feedback
+- 🎉 Celebration Wall for completed projects
+- 🔐 Secure JWT authentication system
 
 ---
 
-## 4. Architecture - MVC Pattern
+## 🌍 Live Demo
 
-MzansiBuilds follows MVC across both the backend and frontend:
+🚀 Frontend (Netlify)
 
+https://mzansibuildsapp.netlify.app
 
-- Models: Define database structure (User, Project)
-- Controllers: Handle business logic and API responses
-- Routes: Define API endpoints
-- Middleware: Handle authentication, authorization, and validation
+⚙️ Backend (Render API)
 
-
-┌─────────────────────────────────────────────────────────────────┐
-│                        FRONTEND (React)                         │
-│                                                                 │
-│   VIEW (components/)          CONTROLLER (controllers/)         │
-│   ┌──────────────────┐        ┌──────────────────────────────┐  │
-│   │ ProjectFeed.js   │        │ projectController.js         │  │
-│   │ ProjectCard.js   │◄──────►│ (Axios API calls to backend) │  │
-│   │ CelebrationWall  │        └──────────────────────────────┘  │
-│   │ CommentForm.js   │                    │                      │
-│   └──────────────────┘                    │ HTTP (Axios)         │
-└───────────────────────────────────────────┼─────────────────────┘
-                                            │
-                                            ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                        BACKEND (Express)                        │
-│                                                                 │
-│  ROUTES            CONTROLLER              MODEL                │
-│  ┌──────────┐     ┌─────────────────┐    ┌──────────────────┐  │
-│  │ users.js │────►│ userController  │───►│   User.js        │  │
-│  │          │     │ .js             │    │  (Mongoose)      │  │
-│  └──────────┘     └─────────────────┘    └──────────────────┘  │
-│  ┌──────────┐     ┌─────────────────┐    ┌──────────────────┐  │
-│  │projects  │────►│ projectController│──►│   Project.js     │  │
-│  │ .js      │     │ .js             │    │  (Mongoose)      │  │
-│  └──────────┘     └─────────────────┘    └──────────────────┘  │
-│                                                    │            │
-└────────────────────────────────────────────────────┼────────────┘
-                                                     │
-                                                     ▼
-                                          ┌──────────────────┐
-                                          │   MongoDB Atlas  │
-                                          │   (Cloud DB)     │
-                                          └──────────────────┘
-
-Data Flow:
-
-React component triggers an action → frontend controller makes Axios call → Express route receives request → middleware verifies JWT → controller processes logic → Mongoose interacts with MongoDB → JSON response returns → UI updates.
+https://mzansibuildsapp.onrender.com
 
 ---
 
-## 5. Project Structure
+## 🧱 Tech Stack
 
-```text
-MzansiBuilds/
-│
-├── backend/                        # Backend folder
-│   ├── index.js                    # Server entry point
-│   ├── package.json
-│   ├── .env.example                # Environment variable template
-│   │
-│   ├── config/
-│   │   └── db.js                   # MongoDB connection
-│   │
-│   ├── models/                     # Database schemas (Models)
-│   │   ├── User.js                 # User schema + bcrypt hook
-│   │   └── Project.js              # Project schema with embedded milestones & comments
-│   │
-│   ├── controllers/                # Business logic (Controllers)
-│   │   ├── userController.js       # register, login, getProfile, getMe
-│   │   └── projectController.js    # create, read, update, milestone, comment, complete
-│   │
-│   ├── routes/                     # API endpoints
-│   │   ├── users.js                # /api/users/*
-│   │   └── projects.js             # /api/projects/*
-│   │
-│   ├── middleware/
-        ├── authMiddleware.js      # JWT protect middleware           
-│   │   └── validateMiddleware.js               
-│   │
-│   └── utils/
-│       └── helpers.js              # generateToken() helper
-│
-├── client/                         # Frontend folder
-│   ├── package.json
-│   ├── .env.example
-│   │
-│   ├── public/
-│   │   └── index.html              # HTML entry point
-│   │
-│   └── src/
-│       ├── App.js                  # Root component, routing, AuthContext
-│       ├── App.css                 # Global styles (green/white/black theme)
-│       ├── index.js                # React DOM entry point
-│       │
-│       ├── components/             # React Components (View)
-│       │   ├── ProjectFeed.js
-│       │   ├── ProjectCard.js
-│       │   ├── CelebrationWall.js
-│       │   └── CommentForm.js
-│       │
-│       ├── pages/                  # Pages / screens
-│       │   ├── Home.js
-│       │   ├── Profile.js
-│       │   └── ProjectDetail.js
-│       │
-│       └── controllers/            # Frontend controller functions
-│           └── projectController.js
-│
-├── tests/
-│   └── app.test.js                 # Jest test suite (30+ tests)
-│
-├── docs/
-│   ├── UML.md                      # Diagrams
-│   └── SECURITY.md                 # Security documentation
-│
-├── .github/
-│   └── workflows/
-│       └── ci.yml                  # CI/CD pipeline
-│
-├── .gitignore
-├── CHANGELOG.md
-└── README.md
+**Frontend:**
+- React (Vite)
+- Axios
+- React Router
+
+**Backend:**
+- Node.js
+- Express.js
+- MongoDB (Mongoose)
+- JWT Authentication
+
+---
+
+## 🔐 Secure By Design
+
+- JWT authentication for protected routes
+- Password hashing using bcrypt
+- Role-based authorization (project ownership validation)
+- Input validation on backend controllers
+- CORS protection
+- Prevention of unauthorized actions
+
+---
+
+## 📊 Project Profiling
+
+- UML design used before development
+- MVC backend architecture
+- RESTful API design
+- Modular frontend structure
+
+UML diagram and architecture diagram available  in `/docs`
+📁 Location: `/uml.png`
+![UML Diagram](./docs/uml.png)
+
+📁 Location: `/architecture.png`
+![Architecture Diagram](./docs/architecture.png)
+
+---
+
+## 🔁 Code Version Control
+
+- Git used for all development
+- Feature-based commits
+- Backend & frontend separation
+- Prepared for CI/CD pipelines
+
+---
+
+## 📦 Setup Instructions
+
+### Backend
+npm install
+npm run dev
+
+
+### Frontend
+npm install
+npm run dev
 
 
 ---
 
+## 🎯 Status
 
- ## 6. Security & Best Practices
+✔ MVP Completed  
+✔ Core Features Implemented  
+✔ Testing Setup Complete  
+✔ Ready for Deployment
 
--  **Data Normalization:** All project statuses are normalized to lowercase in the backend to prevent case-sensitivity bugs. UI presentation is handled via CSS `text-transform: capitalize`.
--  **Validation Middleware:** Implemented custom Express middleware to validate request bodies (Email regex, password length, and enum checks) before reaching the database layer.
-- **Secure Password Storage:** Using `bcryptjs` for one-way salting and hashing of user passwords.
-- **Stateless Auth:** JWT-based authentication ensures secure access to protected routes like project management and milestone updates.
+## 🖼️ Application Screenshots
 
----
+### 🎨 Frontend (User Interface)
 
- ## 7. Authentication
-- JWT-based authentication system
-- Token must be included in requests:
+Below is the main user interface of MzansiBuilds showcasing the live project feed, collaboration features and community engagement.
 
-Authorization: Bearer
+📁 Location: `/docs/frontend-ui.png`
 
-- Protected routes:
-- Create project
-- Update project
-- Delete project
+![Frontend UI](./docs/frontend-ui.png)
 
 ---
 
- ## 8. Running Locally
-- Backend
-  - cd backend
-  - npm install
-  - npm run dev
+### ⚙️ Backend (API / Server Response)
 
-- Frontend
-  - cd client
-  - npm install
-  - npm start
+Below is a snapshot of the backend API showing successful responses from key endpoints such as projects and users.
 
-- Create a .env file in the backend:
+📁 Location: `/docs/backend-api.png`
 
-MONGO_URI=your_mongo_uri
-JWT_SECRET=your_secret
+![Backend API](./docs/backend-api.png)
+
 
 ---
 
- ## 9. API Endpoints
-- Auth
-- POST /api/users/register
-- POST /api/users/login
-- Projects
-- GET /api/projects
-- POST /api/projects (protected)
-- PUT /api/projects/ (protected)
-- DELETE /api/projects/ (protected)
+### 📬 API Testing (Postman)
+
+All endpoints were tested using Postman to validate backend functionality.
+
+📁 Location: `/docs/postman/`
+
+- Authentication endpoints tested (login/signup)
+- Project CRUD operations tested
+- Collaboration and comments tested
+
 
 ---
 
- ## 10. Summary
+## 🧠 Challenges, Solutions & Learnings
 
-MzansiBuilds demonstrates a full-stack MERN application with:
+### 🚧 Challenges Faced
+- 🔌 Backend deployment delays due to Render cold starts on the free tier
+- 🌐 Frontend initially not connecting to backend due to incorrect API base URL
+- 🔐 JWT authentication issues where some protected routes were inaccessible
+- 🔄 CORS errors when connecting Netlify frontend to Render backend
 
-- Structured backend architecture (MVC)
-- Secure authentication and authorization
-- Clean API design
-- Scalable and maintainable code practices
+
+
+### 🛠️ Solutions & Workarounds
+- ✅ Updated Axios baseURL to production backend:
+https://mzansibuildsapp.onrender.com/api
+- ✅ Implemented Axios interceptor to automatically attach JWT token from localStorage
+- ✅ Configured backend CORS to allow requests from the deployed frontend domain
+- ✅ Verified API route consistency between frontend and backend
+- ✅ Used Postman extensively to test endpoints before frontend integration
+
 
 ---
 
- ## 10. Live Demo
-- Backend and frontend are currently not deployed yet.
-- Deployment will be added before final submission.
+## 📚 What I Learned
+- 🚀 How to deploy and connect a full MERN stack application
+- 🌍 How frontend and backend communicate in production environments
+- 🔐 Practical implementation of JWT authentication in real applications
+- 🧱 Debugging real-world API and deployment issues
+- 🔄 Importance of environment configuration (local vs production)
+- ⚙️ How to use Postman effectively for backend testing and validation
+
+
+---
+
+## 🚀 Future Improvements
+
+### 🔔 Notifications System
+- 📩 Real-time notifications for collaboration requests
+- 🔔 Alerts for new comments on user projects
+- 🎉 Celebration notifications when projects are marked as completed
+- 📱 Optional email notifications for important updates
+
+
+### 🌐 Platform Improvements
+- 🔎 Advanced search and filtering for projects and developers
+- 🧑‍🤝‍🧑 User profile enhancements (skills, badges, activity history)
+
+### 📈 Scalability & Performance
+- ☁️ Move backend to scalable cloud architecture (Docker + CI/CD pipeline (GitHub Actions))
+- 🗄️ Database optimization with indexing for faster queries
+- 🚀 Implement caching (Redis) for frequently accessed data
+- 🔐 Strengthen security by running tests before deploy
+
+
+---
+
+## 📈 Project Impact
+
+### 🌍 Real-World Real-World Value
+- 💡 Encourages a “build in public” culture among developers  
+- 🤝 Helps developers connect and collaborate beyond their immediate network
+- 📊 Promotes accountability through visible progress and milestone tracking  
+
+
+### 🧠 Technical Growth
+
+- ⚙️ Strengthened understanding of frontend-backend integration  
+- 🔄 Gained experience debugging real deployment and CORS issues  
+- 🧱 Applied MVC architecture in a production-style backend  
+- 🔗 Learned how to manage state, API calls and authentication in React 
